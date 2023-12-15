@@ -2,6 +2,7 @@ import { MessageService } from 'primeng/api';
 import { Component, OnInit } from '@angular/core';
 import { GlobalSettingsService } from '../../../../services/GlobalSettings/global-settings.service';
 import { GlobalSettingsDataResponse } from '../../../../models/interfaces/GlobalSettings/GlobalSettingsDataResponse';
+import { GlobalSettingsDataTransferService } from '../../../../shared/services/globalSettings/global-settings-data-transfer.service';
 
 @Component({
   selector: 'app-dashboard-home',
@@ -13,7 +14,8 @@ export class DashboardHomeComponent implements OnInit {
 
   constructor(
     private globalSettingsService: GlobalSettingsService,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private globalSettingsDTService: GlobalSettingsDataTransferService
   ) {}
 
   ngOnInit(): void {
@@ -26,6 +28,9 @@ export class DashboardHomeComponent implements OnInit {
         if (response) {
           this.settingsList = response;
           console.log('DADOS DAS CONFIGURAÇÕES: ', this.settingsList);
+          this.globalSettingsDTService.setGlobalSettingsDatas(
+            this.settingsList
+          );
         }
       },
       error: (err) => {
