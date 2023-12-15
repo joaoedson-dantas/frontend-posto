@@ -8,8 +8,10 @@ import { GlobalSettingsDataResponse } from '../../../models/interfaces/GlobalSet
 export class GlobalSettingsDataTransferService {
   public globalSettingsDataEmitter$ =
     new BehaviorSubject<Array<GlobalSettingsDataResponse> | null>(null);
+
   public globalSettingsDatas: Array<GlobalSettingsDataResponse> = [];
 
+  // recebe os dados
   setGlobalSettingsDatas(
     settingsDatas: Array<GlobalSettingsDataResponse>
   ): void {
@@ -19,6 +21,7 @@ export class GlobalSettingsDataTransferService {
     }
   }
 
+  // enviar os dados
   getSettingsDatas() {
     this.globalSettingsDataEmitter$.pipe(take(1)).subscribe({
       next: (response) => {
