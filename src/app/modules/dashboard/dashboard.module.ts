@@ -1,15 +1,18 @@
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DashboardHomeComponent } from './page/dashboard-home/dashboard-home.component';
 import { RouterModule } from '@angular/router';
-import { DASHBOARD_ROUTES } from './dashboard.routing';
+import { CookieService } from 'ngx-cookie-service';
 
 import { ToolbarModule } from 'primeng/toolbar';
 import { CardModule } from 'primeng/card';
 import { ToastModule } from 'primeng/toast';
 import { MessageService } from 'primeng/api';
-import { CookieService } from 'ngx-cookie-service';
+import { ChartModule } from 'primeng/chart';
+
+import { DASHBOARD_ROUTES } from './dashboard.routing';
+import { DashboardHomeComponent } from './page/dashboard-home/dashboard-home.component';
+import { SharedModule } from '../../shared/shared.module';
 
 @NgModule({
   declarations: [DashboardHomeComponent],
@@ -22,6 +25,9 @@ import { CookieService } from 'ngx-cookie-service';
     ToolbarModule,
     CardModule,
     ToastModule,
+    ChartModule,
+    // Shared
+    SharedModule,
   ],
   providers: [MessageService, CookieService],
 })

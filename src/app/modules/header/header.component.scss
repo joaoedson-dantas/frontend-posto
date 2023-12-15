@@ -44,7 +44,7 @@
   color: #333;
 }
 
-.login::after {
+/* .login::after {
   content: '';
   display: inline-block;
   width: 24px;
@@ -53,4 +53,26 @@
   margin-left: .5rem;
   position: relative;
   top: 5px;
+} */
+
+
+.logout {
+  p, a {
+    font-size: 1.3rem;
+  }
+
+  a {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+    transition: .2s;
+    cursor: pointer;
+  }
+  a:hover {
+    color: tomato;
+  }
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 2rem;
 }

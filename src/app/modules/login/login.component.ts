@@ -43,6 +43,7 @@ export class LoginComponent {
           next: (response) => {
             if (response) {
               this.cookieService.set('USER_INFO', response?.token);
+              this.cookieService.set('USER_NAME', response.name);
               this.loginForm.reset();
               this.router.navigate(['/dashboard']);
 
@@ -91,7 +92,6 @@ export class LoginComponent {
               detail: `Erro ao criar o usuário!`,
               life: 2000,
             });
-
             console.log(err);
           },
         });

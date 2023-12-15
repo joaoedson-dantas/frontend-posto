@@ -4,9 +4,18 @@
   </div>
   <nav class="nav">
     <ul class="menu-header">
-      <li>
-        <a href="#" class="login">Login / Criar</a>
+      <li *ngIf="!isLoggedIn">
+        <p>Faça seu login</p>
+      </li>
+      <li *ngIf="isLoggedIn" class="logout">
+        <p>Olá, {{userName}}</p>
+        <p> | </p>
+        <a (click)="handelLogout()" *ngIf="isLoggedIn" class="login">Sair<i class="pi pi-sign-out
+          " style="font-size: 1.5rem"></i> </a>
       </li>
     </ul>
   </nav>
 </header>
+
+<!-- //<i class="pi pi-sign-in
+" style="font-size: 2rem"></i> -->

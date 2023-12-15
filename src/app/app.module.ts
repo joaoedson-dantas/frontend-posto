@@ -13,6 +13,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { HeaderComponent } from './modules/header/header.component';
 import { CommonModule } from '@angular/common';
 import { LoginComponent } from './modules/login/login.component';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [AppComponent, HeaderComponent, LoginComponent],
@@ -23,6 +24,7 @@ import { LoginComponent } from './modules/login/login.component';
     BrowserAnimationsModule,
     ReactiveFormsModule,
     HttpClientModule,
+    RouterModule,
     // PrimeNg
     CardModule,
     ToastModule,
