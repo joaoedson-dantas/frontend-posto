@@ -1,0 +1,52 @@
+<section class="animeLeft login-container">
+
+  <div class="forms">
+    <form [formGroup]="loginForm" *ngIf="loginCard" (ngSubmit)="onSubmitLoginForm()">
+      <!-- Login -->
+      <div class="titles-container">
+        <h1 class="h1">Login</h1>
+        <p>Faça login com sua conta existente!</p>
+      </div>
+      <div class="wrapper-form">
+        <input type="text" id="login" class="input" placeholder="Usuário" formControlName="login" />
+      </div>
+      <div class="wrapper-form">
+        <input type="password" id="senha" class="input" placeholder="Senha" formControlName="password_hash" />
+      </div>
+      <div class="button-container">
+        <button class="button" [disabled]="!this.loginForm.valid">Entrar</button>
+      </div>
+      <p class="create" (click)="loginCard = !loginCard">Criar conta</p>
+    </form>
+
+    <!-- Signup -->
+
+    <form [formGroup]="signupForm" *ngIf="!loginCard" (ngSubmit)="onSubmitSignupForm()">
+
+      <div class="titles-container">
+        <h1 class="h1">Cadastre-se</h1>
+        <p>Crie já sua conta gratuita!</p>
+      </div>
+
+      <div class="wrapper-form">
+        <input type="text" id="login" class="input" placeholder="Nome" formControlName="name" />
+      </div>
+
+      <div class="wrapper-form">
+        <input type="text" id="login" class="input" placeholder="Usuário" formControlName="login" />
+      </div>
+
+      <div class="wrapper-form">
+        <input type="password" id="senha" class="input" placeholder="Senha" formControlName="password_hash" />
+      </div>
+
+      <div class="button-container">
+        <button class="button" [disabled]="!this.signupForm.valid">Cadastrar</button>
+      </div>
+
+      <p class="create" (click)="loginCard = !loginCard">Já possuí uma conta? Login</p>
+
+    </form>
+  </div>
+
+</section>
