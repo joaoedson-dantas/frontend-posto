@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, take } from 'rxjs';
+import { BehaviorSubject, take } from 'rxjs';
 import { GlobalSettingsDataResponse } from '../../../models/interfaces/GlobalSettings/GlobalSettingsDataResponse';
 
 @Injectable({

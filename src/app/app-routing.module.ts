@@ -22,6 +22,14 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuardService],
   },
+  {
+    path: 'config',
+    loadChildren: () =>
+      import('./modules/global-settings/global-settings.module').then(
+        (m) => m.GlobalSettingsModule
+      ),
+    canActivate: [AuthGuardService],
+  },
 ];
 
 @NgModule({

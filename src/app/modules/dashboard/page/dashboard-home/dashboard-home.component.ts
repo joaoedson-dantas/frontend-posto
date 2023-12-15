@@ -32,7 +32,6 @@ export class DashboardHomeComponent implements OnInit, OnDestroy {
         next: (response) => {
           if (response) {
             this.settingsList = response;
-            console.log('DADOS DAS CONFIGURAÇÕES: ', this.settingsList);
             this.globalSettingsDTService.setGlobalSettingsDatas(
               this.settingsList
             );

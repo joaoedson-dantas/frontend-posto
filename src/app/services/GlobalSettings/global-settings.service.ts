@@ -2,7 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../environments/environment';
-import { Observable, map } from 'rxjs';
+import { Observable } from 'rxjs';
 import { GlobalSettingsDataResponse } from '../../models/interfaces/GlobalSettings/GlobalSettingsDataResponse';
 
 @Injectable({

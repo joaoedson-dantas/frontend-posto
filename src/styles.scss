@@ -79,3 +79,15 @@ button, input {
     color: var(--gray-dark) !important;
   }
 }
+
+
+/* Dashboard */
+.dashboard-container {
+  display: grid;
+  grid-template-columns: 1fr 4fr;
+  gap: 1rem;
+}
+
+.container-teste1 {
+  background-color: blue;
+}
