@@ -1,0 +1,64 @@
+<div class="container animeLeft">
+  <!--   <div>
+    <h1>Configurações globais: </h1>
+  </div> -->
+
+  <!--   <div *ngFor="let setting of settings">
+
+  </div> -->
+
+  <p-card styleClass="shadow-3 m-5 text-indigo-800" header="Configurações globais">
+    <p-table [value]="settings" [tableStyle]="{ 'min-width': '50rem' }" [responsive]="true" [(selection)]="settingSelected" [rowHover]="true" dataKey="id">
+
+      <ng-template pTemplate="header">
+        <tr>
+          <th>Id</th>
+          <th>key</th>
+          <th>Label</th>
+          <th>Valor</th>
+          <th>
+            <p-button styleClass="p-button-info" icon="pi pi-plus" label="Adicionar" pTooltip="Adicionar uma nova configuração" tooltipPosition="top"></p-button>
+          </th>
+        </tr>
+      </ng-template>
+
+      <ng-template pTemplate="body" let-setting>
+        <tr>
+          <td>{{ setting?.id }}</td>
+          <td>{{ setting?.key }}</td>
+          <td>{{ setting?.label }}</td>
+          <td>{{ setting?.value}}</td>
+          <td>
+            <div class="flex">
+              <button pButton pRipple class="p-button-rounded p-button-warning" icon="pi pi-pencil" pTooltip="Editar configuração" tooltipPosition="top"></button>
+            </div>
+          </td>
+        </tr>
+      </ng-template>
+
+    </p-table>
+
+  </p-card>
+</div>
+
+
+<!-- <div class="table">
+  <p-table [value]="settings" [tableStyle]="{ 'min-width': '50rem' }">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Id</th>
+        <th>key</th>
+        <th>Label</th>
+        <th>Valor</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-setting>
+      <tr>
+        <td>{{ setting?.id }}</td>
+        <td>{{ setting?.key }}</td>
+        <td>{{ setting?.label }}</td>
+        <td>{{ setting?.value }}</td>
+      </tr>
+    </ng-template>
+  </p-table>
+</div> -->

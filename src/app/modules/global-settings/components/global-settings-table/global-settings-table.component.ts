@@ -8,4 +8,6 @@ import { GlobalSettingsDataResponse } from '../../../../models/interfaces/Global
 })
 export class GlobalSettingsTableComponent {
   @Input() settings: Array<GlobalSettingsDataResponse> = []; // Serve para receber dados do componente filho
+
+  public settingSelected!: GlobalSettingsDataResponse;
 }
