@@ -1,6 +1,5 @@
 
 .toolbar_navigation-container {
-  margin-top: 4rem;
   padding: 1rem;
   align-items: center;
   height: calc(100vh - 6rem);
@@ -8,6 +7,7 @@
   flex-direction: column;
   justify-content: start;
   gap: 4rem;
+  box-shadow: 2px -1px 1px rgba(0, 0, 0, 0.1);
 }
 
 .toolbar_navigating-list {
@@ -19,6 +19,7 @@
 
 
 .toolbar_navigation-container h1 {
+  margin-top: 3rem;
   font-size: 1.5rem;
   padding: .1rem 1.2rem;
 }
@@ -26,7 +27,7 @@
 
 .toolbar_navigating-list button {
   border: none;
-  font-size: 1.5rem;
+  font-size: 1rem;
   padding: .5rem 1rem;
   background-color: #fff;
   font-weight: 700;

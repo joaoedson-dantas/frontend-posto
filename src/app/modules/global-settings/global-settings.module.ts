@@ -19,9 +19,10 @@ import { ConfirmationService } from 'primeng/api';
 import { SharedModule } from '../../shared/shared.module';
 import { GlobalSettingsHomeComponent } from './page/global-settings-home/global-settings-home.component';
 import { SETTINGS_ROUTES } from './global-settings.routing';
+import { GlobalSettingsTableComponent } from './components/global-settings-table/global-settings-table.component';
 
 @NgModule({
-  declarations: [GlobalSettingsHomeComponent],
+  declarations: [GlobalSettingsHomeComponent, GlobalSettingsTableComponent],
   imports: [
     CommonModule,
     FormsModule,
