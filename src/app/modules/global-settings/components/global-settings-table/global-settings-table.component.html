@@ -17,7 +17,7 @@
           <th>Label</th>
           <th>Valor</th>
           <th>
-            <p-button styleClass="p-button-info" icon="pi pi-plus" label="Adicionar" pTooltip="Adicionar uma nova configuração" tooltipPosition="top"></p-button>
+            <p-button styleClass="p-button-info" icon="pi pi-plus" label="Adicionar" pTooltip="Adicionar uma nova configuração" tooltipPosition="top" (onClick)="handleSettingsEvent(addSettingEvent)"></p-button>
           </th>
         </tr>
       </ng-template>
@@ -30,7 +30,7 @@
           <td>{{ setting?.value}}</td>
           <td>
             <div class="flex">
-              <button pButton pRipple class="p-button-rounded p-button-warning" icon="pi pi-pencil" pTooltip="Editar configuração" tooltipPosition="top"></button>
+              <button pButton pRipple class="p-button-rounded p-button-warning" icon="pi pi-pencil" pTooltip="Editar configuração" tooltipPosition="top" (click)="handleSettingsEvent(editSettingEvent, setting?.id )"></button>
             </div>
           </td>
         </tr>

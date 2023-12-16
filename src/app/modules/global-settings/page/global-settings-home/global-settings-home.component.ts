@@ -5,6 +5,7 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { GlobalSettingsDataResponse } from '../../../../models/interfaces/GlobalSettings/GlobalSettingsDataResponse';
+import { EventAction } from '../../../../models/interfaces/GlobalSettings/event/EventAction';
 
 @Component({
   selector: 'app-global-settings-home',
@@ -61,6 +62,14 @@ export class GlobalSettingsHomeComponent implements OnInit, OnDestroy {
           this.router.navigate(['/dashboard']);
         },
       });
+  }
+
+  // metodo para recebe o output do Dumb Component;
+
+  handleSettingAction(event: EventAction): void {
+    if (event) {
+      console.log('DADOS DO ENVENTO RECEBIDO: ', event);
+    }
   }
 
   ngOnDestroy(): void {
