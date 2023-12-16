@@ -1,6 +1,5 @@
 <!-- Formulário de nova configuração -->
-
-<div>
+<div *ngIf="settingAction?.event?.action === addSettingAction">
   <form [formGroup]="createSettingForm" (ngSubmit)="handleSubmitCreateConfig()">
     <div class="card flex  flex-column md:flex-column gap-3">
       <!-- key -->
@@ -12,8 +11,19 @@
       <div class="flex flex-row justify-content-center align-content-center align-items-center m-1">
         <p-button [disabled]="!createSettingForm.valid" type="submit" label="Cadastrar"></p-button>
       </div>
-
     </div>
+  </form>
+</div>
+<!-- Formulário de editar configuração -->
+<div *ngIf="settingAction?.event?.action === editSettingAction">
+  <form [formGroup]="editSettingForm" (ngSubmit)="handleSubmitEditSetting()">
+    <div class="card flex flex-column md:flex-column gap-3">
+      <input pInputText placeholder="label" formControlName="label">
+      <input pInputText placeholder="value" formControlName="value">
 
+      <div class="flex flex-row justify-content-center align-content-center align-items-center">
+        <p-button [disabled]="!editSettingForm.valid" type="submit" label="Editar"></p-button>
+      </div>
+    </div>
   </form>
 </div>

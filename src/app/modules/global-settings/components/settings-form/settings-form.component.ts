@@ -9,6 +9,7 @@ import { CreateSettingRequest } from '../../../../models/interfaces/GlobalSettin
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { EventAction } from '../../../../models/interfaces/GlobalSettings/event/EventAction';
 import { GlobalSettingsDataResponse } from '../../../../models/interfaces/GlobalSettings/response/GlobalSettingsDataResponse';
+import { SettingsEvent } from '../../../../models/enums/globalSetingsEnums/GlobalSettingsEvent';
 
 @Component({
   selector: 'app-settings-form',
@@ -17,7 +18,7 @@ import { GlobalSettingsDataResponse } from '../../../../models/interfaces/Global
 })
 export class SettingsFormComponent implements OnInit, OnDestroy {
   private readonly destroy$: Subject<void> = new Subject();
-  private settingAction!: {
+  public settingAction!: {
     event: EventAction;
     settingData: Array<GlobalSettingsDataResponse>;
   };
@@ -25,18 +26,20 @@ export class SettingsFormComponent implements OnInit, OnDestroy {
   public settingSelectedData!: GlobalSettingsDataResponse;
   public settingData!: Array<GlobalSettingsDataResponse>;
 
-  // adicioando o formuário reativo
-
+  // Formulários
   public createSettingForm = this.formBuilder.group({
     key: ['', Validators.required],
     label: ['', Validators.required],
     value: ['', Validators.required],
   });
-
   public editSettingForm = this.formBuilder.group({
     label: ['', Validators.required],
     value: ['', Validators.required],
   });
+
+  // propriedades para diferenciar os eventos/actions da aplicação
+  public addSettingAction = SettingsEvent.ADD_SETTING_EVENT;
+  public editSettingAction = SettingsEvent.EDIT_SETTING_EVENT;
 
   handleSubmitCreateConfig(): void {
     if (this.createSettingForm?.value && this.createSettingForm.valid) {
@@ -72,8 +75,7 @@ export class SettingsFormComponent implements OnInit, OnDestroy {
     }
     this.createSettingForm.reset();
   }
-
-  handleSubmiteEditSetting(): void {}
+  handleSubmitEditSetting(): void {}
 
   constructor(
     private formBuilder: FormBuilder,
@@ -84,7 +86,7 @@ export class SettingsFormComponent implements OnInit, OnDestroy {
     private ref: DynamicDialogConfig
   ) {}
 
-  // metodo responsável por buscar os dados dos produtos selecionados :
+  // metodo responsável por buscar os dados dos produtos selecionados:
   getSettingSelectedData(settingId: number): void {
     const allSettings = this.settingAction?.settingData;
     console.log('testando o all settings ', allSettings.length);
@@ -106,7 +108,7 @@ export class SettingsFormComponent implements OnInit, OnDestroy {
     }
   }
 
-  // metodo responsável por buscar os dados que estão armazenados em memoria vindos de outra tela
+  // metodo responsável por buscar os dados da api
   getSettingData(): void {
     // buscando os dados na api
     this.globalSettingsService
