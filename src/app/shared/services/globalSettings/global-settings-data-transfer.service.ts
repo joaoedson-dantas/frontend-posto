@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, take } from 'rxjs';
-import { GlobalSettingsDataResponse } from '../../../models/interfaces/GlobalSettings/GlobalSettingsDataResponse';
+import { GlobalSettingsDataResponse } from '../../../models/interfaces/GlobalSettings/response/GlobalSettingsDataResponse';
 
 @Injectable({
   providedIn: 'root',

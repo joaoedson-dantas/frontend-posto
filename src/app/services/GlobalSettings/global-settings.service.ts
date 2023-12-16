@@ -1,9 +1,11 @@
+import { CreateSettingRequest } from './../../models/interfaces/GlobalSettings/request/CreateSettingRequest';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
-import { GlobalSettingsDataResponse } from '../../models/interfaces/GlobalSettings/GlobalSettingsDataResponse';
+import { GlobalSettingsDataResponse } from '../../models/interfaces/GlobalSettings/response/GlobalSettingsDataResponse';
+import { CreateSettingResponse } from '../../models/interfaces/GlobalSettings/response/CreteSettingsResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +26,16 @@ export class GlobalSettingsService {
   getAllGlobalSettings(): Observable<Array<GlobalSettingsDataResponse>> {
     return this.http.get<Array<GlobalSettingsDataResponse>>(
       `${this.API_URL}/global-settings`,
+      this.httpOptions
+    );
+  }
+
+  createSetting(
+    datasRequest: CreateSettingRequest
+  ): Observable<CreateSettingResponse> {
+    return this.http.post<CreateSettingResponse>(
+      `${this.API_URL}/global-settings`,
+      datasRequest,
       this.httpOptions
     );
   }

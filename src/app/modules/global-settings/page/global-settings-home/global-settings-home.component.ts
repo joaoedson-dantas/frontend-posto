@@ -4,7 +4,7 @@ import { GlobalSettingsService } from './../../../../services/GlobalSettings/glo
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
-import { GlobalSettingsDataResponse } from '../../../../models/interfaces/GlobalSettings/GlobalSettingsDataResponse';
+import { GlobalSettingsDataResponse } from '../../../../models/interfaces/GlobalSettings/response/GlobalSettingsDataResponse';
 import { EventAction } from '../../../../models/interfaces/GlobalSettings/event/EventAction';
 
 @Component({

@@ -1,5 +1,5 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
-import { GlobalSettingsDataResponse } from '../../../../models/interfaces/GlobalSettings/GlobalSettingsDataResponse';
+import { GlobalSettingsDataResponse } from '../../../../models/interfaces/GlobalSettings/response/GlobalSettingsDataResponse';
 import { SettingsEvent } from '../../../../models/enums/globalSetingsEnums/GlobalSettingsEvent';
 import { EventAction } from '../../../../models/interfaces/GlobalSettings/event/EventAction';
 

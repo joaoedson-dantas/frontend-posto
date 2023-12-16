@@ -1,7 +1,7 @@
 import { MessageService } from 'primeng/api';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { GlobalSettingsService } from '../../../../services/GlobalSettings/global-settings.service';
-import { GlobalSettingsDataResponse } from '../../../../models/interfaces/GlobalSettings/GlobalSettingsDataResponse';
+import { GlobalSettingsDataResponse } from '../../../../models/interfaces/GlobalSettings/response/GlobalSettingsDataResponse';
 import { GlobalSettingsDataTransferService } from '../../../../shared/services/globalSettings/global-settings-data-transfer.service';
 import { Subject, takeUntil } from 'rxjs';
 
