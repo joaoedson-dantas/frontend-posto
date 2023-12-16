@@ -6,6 +6,7 @@ import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { GlobalSettingsDataResponse } from '../../models/interfaces/GlobalSettings/response/GlobalSettingsDataResponse';
 import { CreateSettingResponse } from '../../models/interfaces/GlobalSettings/response/CreteSettingsResponse';
+import { UpdateSettingRequest } from '../../models/interfaces/GlobalSettings/request/UpdateSettingRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -34,6 +35,14 @@ export class GlobalSettingsService {
     datasRequest: CreateSettingRequest
   ): Observable<CreateSettingResponse> {
     return this.http.post<CreateSettingResponse>(
+      `${this.API_URL}/global-settings`,
+      datasRequest,
+      this.httpOptions
+    );
+  }
+
+  updateSetting(datasRequest: UpdateSettingRequest): Observable<void> {
+    return this.http.put<void>(
       `${this.API_URL}/global-settings`,
       datasRequest,
       this.httpOptions
