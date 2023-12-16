@@ -20,9 +20,10 @@ import { SharedModule } from '../../shared/shared.module';
 import { GlobalSettingsHomeComponent } from './page/global-settings-home/global-settings-home.component';
 import { SETTINGS_ROUTES } from './global-settings.routing';
 import { GlobalSettingsTableComponent } from './components/global-settings-table/global-settings-table.component';
+import { SettingsFormComponent } from './components/settings-form/settings-form.component';
 
 @NgModule({
-  declarations: [GlobalSettingsHomeComponent, GlobalSettingsTableComponent],
+  declarations: [GlobalSettingsHomeComponent, GlobalSettingsTableComponent, SettingsFormComponent],
   imports: [
     CommonModule,
     FormsModule,

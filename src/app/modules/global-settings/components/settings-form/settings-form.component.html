@@ -1,0 +1,19 @@
+<!-- Formulário de nova configuração -->
+
+<div>
+  <form [formGroup]="createSettingForm" (ngSubmit)="handleSubmitCreateConfig()">
+    <div class="card flex  flex-column md:flex-column gap-3">
+      <!-- key -->
+      <input pInputText placeholder="Definia uma chave" formControlName="key">
+      <!-- label -->
+      <input pInputText placeholder="Defina uma etiqueta" formControlName="label">
+      <div class="flex flex-row justify-content-center align-content-center align-items-center m-1">
+        <p-button [disabled]="!createSettingForm.valid" type="submit" label="Cadastrar">
+
+        </p-button>
+      </div>
+
+    </div>
+
+  </form>
+</div>
