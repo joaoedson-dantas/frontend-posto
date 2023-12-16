@@ -1,3 +1,4 @@
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { MessageService } from 'primeng/api';
 import { GlobalSettingsDataTransferService } from './../../../../shared/services/globalSettings/global-settings-data-transfer.service';
 import { GlobalSettingsService } from './../../../../services/GlobalSettings/global-settings.service';
@@ -6,6 +7,7 @@ import { Subject, takeUntil } from 'rxjs';
 import { Router } from '@angular/router';
 import { GlobalSettingsDataResponse } from '../../../../models/interfaces/GlobalSettings/response/GlobalSettingsDataResponse';
 import { EventAction } from '../../../../models/interfaces/GlobalSettings/event/EventAction';
+import { SettingsFormComponent } from '../../components/settings-form/settings-form.component';
 
 @Component({
   selector: 'app-global-settings-home',
@@ -14,13 +16,15 @@ import { EventAction } from '../../../../models/interfaces/GlobalSettings/event/
 })
 export class GlobalSettingsHomeComponent implements OnInit, OnDestroy {
   private readonly destroy$: Subject<void> = new Subject();
+  private ref!: DynamicDialogRef;
   public settingsList: Array<GlobalSettingsDataResponse> = [];
 
   constructor(
     private globalSettingsService: GlobalSettingsService,
     private globalSettingsDataTransferService: GlobalSettingsDataTransferService,
     private router: Router,
-    private messageService: MessageService
+    private messageService: MessageService,
+    private dialogService: DialogService
   ) {}
 
   ngOnInit(): void {
@@ -35,7 +39,6 @@ export class GlobalSettingsHomeComponent implements OnInit, OnDestroy {
 
     if (!settingsLoaded == undefined || settingsLoaded.length != 0) {
       this.settingsList = settingsLoaded;
-      console.log(' oi DADOS DE PRODUTOS', this.settingsList);
     } else this.getAPISettingsDatas();
   }
 
@@ -48,7 +51,6 @@ export class GlobalSettingsHomeComponent implements OnInit, OnDestroy {
         next: (response) => {
           if (response) {
             this.settingsList = response;
-            console.log('oi sou um dado da api', this.settingsList);
           }
         },
         error: (err) => {
@@ -68,7 +70,19 @@ export class GlobalSettingsHomeComponent implements OnInit, OnDestroy {
 
   handleSettingAction(event: EventAction): void {
     if (event) {
-      console.log('DADOS DO ENVENTO RECEBIDO: ', event);
+      this.ref = this.dialogService.open(SettingsFormComponent, {
+        header: event?.action,
+        width: '70%',
+        contentStyle: { overflow: 'auto' },
+        baseZIndex: 1000,
+        maximizable: true,
+        data: {
+          event: event,
+        },
+      });
+      this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe({
+        next: () => this.getAPISettingsDatas(),
+      });
     }
   }
 
