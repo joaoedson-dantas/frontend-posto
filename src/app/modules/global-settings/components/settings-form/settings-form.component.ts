@@ -10,6 +10,7 @@ import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { EventAction } from '../../../../models/interfaces/GlobalSettings/event/EventAction';
 import { GlobalSettingsDataResponse } from '../../../../models/interfaces/GlobalSettings/response/GlobalSettingsDataResponse';
 import { SettingsEvent } from '../../../../models/enums/globalSetingsEnums/GlobalSettingsEvent';
+import { UpdateSettingRequest } from '../../../../models/interfaces/GlobalSettings/request/UpdateSettingRequest';
 
 @Component({
   selector: 'app-settings-form',
@@ -75,7 +76,47 @@ export class SettingsFormComponent implements OnInit, OnDestroy {
     }
     this.createSettingForm.reset();
   }
-  handleSubmitEditSetting(): void {}
+  handleSubmitEditSetting(): void {
+    if (
+      this.editSettingForm.value &&
+      this.editSettingForm.valid &&
+      this.settingAction.event.id
+    ) {
+      console.log('O id é: ', Number(this.settingAction?.event?.id));
+      // motando os dados para atualizar
+      const requestEditSetting: UpdateSettingRequest = {
+        id: Number(this.settingAction?.event?.id),
+        label: this.editSettingForm.value.label as string,
+        value: this.editSettingForm.value.value as string,
+      };
+
+      // chamando o servico de atualizar
+      this.globalSettingsService
+        .updateSetting(requestEditSetting)
+        .pipe(takeUntil(this.destroy$))
+        .subscribe({
+          next: () => {
+            this.messageService.add({
+              severity: 'success',
+              summary: 'Sucesso',
+              detail: 'Configuração editada com sucesso!',
+              life: 2500,
+            });
+            this.editSettingForm.reset();
+          },
+          error: (err) => {
+            console.log(err);
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Erro',
+              detail: 'Erro ao editar a configuração!',
+              life: 2500,
+            });
+            this.editSettingForm.reset();
+          },
+        });
+    }
+  }
 
   constructor(
     private formBuilder: FormBuilder,
@@ -88,10 +129,9 @@ export class SettingsFormComponent implements OnInit, OnDestroy {
 
   // metodo responsável por buscar os dados dos produtos selecionados:
   getSettingSelectedData(settingId: number): void {
-    const allSettings = this.settingAction?.settingData;
-    console.log('testando o all settings ', allSettings.length);
+    const allSettings = this.settingData;
 
-    if (allSettings.length > 0) {
+    if (allSettings?.length > 0) {
       const settingFiltered = allSettings.filter(
         (element) => element?.id === settingId
       );
@@ -100,6 +140,7 @@ export class SettingsFormComponent implements OnInit, OnDestroy {
         this.settingSelectedData = settingFiltered[0];
 
         // setar um valor existente no formulári vazio
+
         this.editSettingForm.setValue({
           label: this.settingSelectedData?.label,
           value: this.settingSelectedData?.value,
@@ -110,6 +151,7 @@ export class SettingsFormComponent implements OnInit, OnDestroy {
 
   // metodo responsável por buscar os dados da api
   getSettingData(): void {
+    console.log('teste');
     // buscando os dados na api
     this.globalSettingsService
       .getAllGlobalSettings()
@@ -130,7 +172,14 @@ export class SettingsFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.settingAction = this.ref.data;
-    throw new Error('Method not implemented.');
+
+    // introduzir os dados nos campos
+    if (
+      this.settingAction?.event.action === this.editSettingAction &&
+      this.settingAction?.settingData
+    ) {
+      this.getSettingSelectedData(Number(this.settingAction?.event?.id));
+    }
   }
 
   ngOnDestroy(): void {

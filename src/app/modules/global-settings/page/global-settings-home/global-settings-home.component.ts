@@ -35,7 +35,6 @@ export class GlobalSettingsHomeComponent implements OnInit, OnDestroy {
     // configurações que estão armazenadas em estado
     const settingsLoaded =
       this.globalSettingsDataTransferService.getSettingsDatas();
-    console.log(settingsLoaded.length);
 
     if (!settingsLoaded == undefined || settingsLoaded.length != 0) {
       this.settingsList = settingsLoaded;
