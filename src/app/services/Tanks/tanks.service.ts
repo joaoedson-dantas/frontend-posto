@@ -2,10 +2,14 @@ import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
-import { Observable } from 'rxjs';
+import { Observable, map } from 'rxjs';
 import { GetTanksResponse } from '../../models/interfaces/Tanks/GetTanksResponse';
 import { FillTankDataRequest } from '../../models/interfaces/Tanks/request/FillTankDataRequest';
 import { FillTankDataResponse } from '../../models/interfaces/Tanks/request/FillTankDataReponse';
+import {
+  FillTankResponse,
+  GetAllFillTankResponse,
+} from '../../models/interfaces/Tanks/response/GetAllFillTankResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -38,5 +42,14 @@ export class TanksService {
       requestData,
       this.httpOptions
     );
+  }
+
+  getAllFillTanks(): Observable<Array<FillTankResponse>> {
+    return this.http
+      .get<GetAllFillTankResponse>(
+        `${this.API_URL}/fill-tanks`,
+        this.httpOptions
+      )
+      .pipe(map((response) => response.content));
   }
 }
