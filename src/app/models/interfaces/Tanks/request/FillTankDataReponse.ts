@@ -1,4 +1,4 @@
-export interface FillTankDataRequest {
+export interface FillTankDataResponse {
   id: number;
   date: Date;
   liters: number;

@@ -1,4 +1,4 @@
-export interface EventAction {
+export interface EventActionTank {
   action: string;
-  id?: string;
+  id?: number;
 }

@@ -4,8 +4,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { GetTanksResponse } from '../../models/interfaces/Tanks/GetTanksResponse';
-import { FillTankDataRequest } from '../../models/interfaces/Tanks/request/FillTankDataReponse';
-import { FillTankDataResponse } from '../../models/interfaces/Tanks/response/FillTankDataRequest';
+import { FillTankDataRequest } from '../../models/interfaces/Tanks/request/FillTankDataRequest';
+import { FillTankDataResponse } from '../../models/interfaces/Tanks/request/FillTankDataReponse';
 
 @Injectable({
   providedIn: 'root',
