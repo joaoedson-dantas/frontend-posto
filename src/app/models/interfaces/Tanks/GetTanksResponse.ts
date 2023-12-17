@@ -1,4 +1,4 @@
-export interface FuelTanksResponse {
+export interface GetTanksResponse {
   id: number;
   name: string;
   liters: number;

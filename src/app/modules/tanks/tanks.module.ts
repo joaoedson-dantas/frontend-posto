@@ -19,9 +19,10 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmationService } from 'primeng/api';
+import { TanksTableComponent } from './components/tanks-table/tanks-table.component';
 
 @NgModule({
-  declarations: [TanksHomeComponent],
+  declarations: [TanksHomeComponent, TanksTableComponent],
   imports: [
     CommonModule,
     FormsModule,
