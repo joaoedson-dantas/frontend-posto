@@ -7,6 +7,11 @@ import {
   GetAllFuelBombsResponse,
   GetFuelBombsResponse,
 } from '../models/interfaces/FuelCar/Pumps/GetAllFuelBombsResponse';
+import { SupplyRequest } from '../models/interfaces/FuelCar/supply/request/SupplyRequest';
+import {
+  GetAllSupplyResponse,
+  SupplyResponse,
+} from '../models/interfaces/FuelCar/supply/SupplyResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -30,6 +35,25 @@ export class FuelTheCarService {
         `${this.API_URL}/fuel-pumps`,
         this.httpOptions
       )
-      .pipe(map((r) => r.content));
+      .pipe(map((response) => response.content));
+  }
+
+  // metodos de abastecimento
+  toFuel(requestData: SupplyRequest): Observable<SupplyResponse> {
+    return this.http.post<SupplyResponse>(
+      `${this.API_URL}/supply/to-fuel`,
+      requestData,
+      this.httpOptions
+    );
+  }
+
+  // metodos de buscar todos os abastecimentos;
+  ListAllSupplies(): Observable<Array<SupplyResponse>> {
+    return this.http
+      .get<GetAllSupplyResponse>(
+        `${this.API_URL}/supply/all-supplies`,
+        this.httpOptions
+      )
+      .pipe(map((response) => response.content));
   }
 }
