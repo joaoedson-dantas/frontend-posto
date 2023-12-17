@@ -5,6 +5,7 @@ import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { Subject } from 'rxjs';
 import { TanksEvent } from '../../../../models/enums/TanksEnums/TanksEvent';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-tanks-form',
@@ -16,22 +17,26 @@ export class TanksFormComponent implements OnInit, OnDestroy {
 
   public tanksAction!: { event: TanksEvent };
 
-  public tankForm = this.formBuilder.group({
+  public fillTankForm = this.formBuilder.group({
     liters: [0, Validators.required],
-    /*  fuel_tank_id: [0, Validators.required], */
   });
 
   constructor(
     public ref: DynamicDialogConfig,
     private formBuilder: FormBuilder,
     private messageService: MessageService,
-    private tanksService: TanksService
+    private tanksService: TanksService,
+    private router: Router
   ) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getAllTanks();
+  }
+
+  getAllTanks() {}
 
   // metodo abastecer tanque
-  handleSubmiteAddFuel(): void {}
+  handleSubmitAddFuel(): void {}
 
   ngOnDestroy(): void {
     this.destroy$.next();
