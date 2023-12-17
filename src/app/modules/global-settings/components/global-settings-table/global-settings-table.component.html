@@ -1,15 +1,7 @@
 <div class="container animeLeft">
-  <!--   <div>
-    <h1>Configurações globais: </h1>
-  </div> -->
-
-  <!--   <div *ngFor="let setting of settings">
-
-  </div> -->
 
   <p-card styleClass="shadow-3 m-5 text-indigo-800" header="Configurações globais">
     <p-table [value]="settings" [tableStyle]="{ 'min-width': '50rem' }" [responsive]="true" [(selection)]="settingSelected" [rowHover]="true" dataKey="id">
-
       <ng-template pTemplate="header">
         <tr>
           <th>Id</th>
@@ -35,9 +27,7 @@
           </td>
         </tr>
       </ng-template>
-
     </p-table>
-
   </p-card>
 </div>
 

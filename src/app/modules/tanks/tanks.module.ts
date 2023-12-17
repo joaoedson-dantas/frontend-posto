@@ -24,6 +24,7 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmationService } from 'primeng/api';
+import { PaginatorModule } from 'primeng/paginator';
 
 @NgModule({
   declarations: [TanksHomeComponent, TanksTableComponent, TanksFormComponent],
@@ -48,6 +49,7 @@ import { ConfirmationService } from 'primeng/api';
     DropdownModule,
     ConfirmDialogModule,
     TooltipModule,
+    PaginatorModule,
   ],
   providers: [DialogService, ConfirmationService, LogoutService],
 })

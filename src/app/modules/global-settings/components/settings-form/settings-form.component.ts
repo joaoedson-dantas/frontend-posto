@@ -151,7 +151,6 @@ export class SettingsFormComponent implements OnInit, OnDestroy {
 
   // metodo responsável por buscar os dados da api
   getSettingData(): void {
-    console.log('teste');
     // buscando os dados na api
     this.globalSettingsService
       .getAllGlobalSettings()

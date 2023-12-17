@@ -36,19 +36,15 @@ export class TanksFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.fuel_tank_id = this.ref.data?.event?.id;
-    this.getAllTanks();
+    // this.getAllTanks();
   }
 
-  getAllTanks() {}
-
-  // metodo abastecer tanque
   handleSubmitAddFuel(): void {
     if (this.fillTankForm?.value && this.fillTankForm.valid) {
       const requestData: FillTankDataRequest = {
         liters: this.fillTankForm.value?.liters as number,
         fuel_tank_id: this.fuel_tank_id as number,
       };
-
       this.tanksService
         .fillFuelTank(requestData)
         .pipe(takeUntil(this.destroy$))
@@ -62,7 +58,7 @@ export class TanksFormComponent implements OnInit, OnDestroy {
                 life: 3000,
               });
               this.fillTankForm.reset();
-              this.getAllTanks();
+              // this.getAllTanks();
             }
           },
           error: (err) => {

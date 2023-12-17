@@ -10,7 +10,6 @@ import { GetTanksResponse } from '../../../../models/interfaces/Tanks/GetTanksRe
 import { HttpErrorResponse } from '@angular/common/http';
 import { EventActionTank } from '../../../../models/interfaces/Tanks/event/EventActionTank';
 import { TanksFormComponent } from '../../components/tanks-form/tanks-form.component';
-import { FillTankDataResponse } from '../../../../models/interfaces/Tanks/request/FillTankDataReponse';
 
 @Component({
   selector: 'app-tanks-home',
@@ -53,7 +52,9 @@ export class TanksHomeComponent implements OnInit, OnDestroy {
         },
       });
       this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe({
-        next: () => this.getAllTanks(),
+        next: () => {
+          this.getAllTanks(), this.getAllFillTank();
+        },
       });
     }
   }
@@ -78,6 +79,7 @@ export class TanksHomeComponent implements OnInit, OnDestroy {
               detail: 'Logue novamente',
               life: 2500,
             });
+            this.router.navigate(['/login']);
           }
           console.log(err);
           this.messageService.add({
@@ -96,7 +98,6 @@ export class TanksHomeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          console.log(response);
           if (response.length > 0) {
             this.fillTankList = response;
           }
