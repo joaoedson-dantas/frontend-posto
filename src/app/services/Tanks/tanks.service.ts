@@ -4,6 +4,8 @@ import { Injectable } from '@angular/core';
 import { environment } from '../../environments/environment';
 import { Observable } from 'rxjs';
 import { GetTanksResponse } from '../../models/interfaces/Tanks/GetTanksResponse';
+import { FillTankDataRequest } from '../../models/interfaces/Tanks/request/FillTankDataReponse';
+import { FillTankDataResponse } from '../../models/interfaces/Tanks/response/FillTankDataRequest';
 
 @Injectable({
   providedIn: 'root',
@@ -24,6 +26,16 @@ export class TanksService {
   getAllFuelTanks(): Observable<Array<GetTanksResponse>> {
     return this.http.get<Array<GetTanksResponse>>(
       `${this.API_URL}/fuel-tanks`,
+      this.httpOptions
+    );
+  }
+
+  fillFuelTank(
+    requestData: FillTankDataRequest
+  ): Observable<Array<FillTankDataResponse>> {
+    return this.http.post<Array<FillTankDataResponse>>(
+      `${this.API_URL}`,
+      requestData,
       this.httpOptions
     );
   }
