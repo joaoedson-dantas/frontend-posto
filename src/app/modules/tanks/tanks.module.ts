@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { TanksHomeComponent } from './page/tanks-home/tanks-home.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TANKS_ROUTES } from './tanks.routing';
 import { SharedModule } from '../../shared/shared.module';
 import { HttpClientModule } from '@angular/common/http';
+
+import { TanksHomeComponent } from './page/tanks-home/tanks-home.component';
+import { TanksTableComponent } from './components/tanks-table/tanks-table.component';
+import { TanksFormComponent } from './components/tanks-form/tanks-form.component';
+import { LogoutService } from '../../shared/services/logout/logout.service';
+
 import { CardModule } from 'primeng/card';
 import { ButtonModule } from 'primeng/button';
 import { TableModule } from 'primeng/table';
@@ -19,9 +24,6 @@ import { DropdownModule } from 'primeng/dropdown';
 import { ConfirmDialogModule } from 'primeng/confirmdialog';
 import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmationService } from 'primeng/api';
-import { TanksTableComponent } from './components/tanks-table/tanks-table.component';
-import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
-import { TanksFormComponent } from './components/tanks-form/tanks-form.component';
 
 @NgModule({
   declarations: [TanksHomeComponent, TanksTableComponent, TanksFormComponent],
@@ -47,6 +49,6 @@ import { TanksFormComponent } from './components/tanks-form/tanks-form.component
     ConfirmDialogModule,
     TooltipModule,
   ],
-  providers: [DialogService, ConfirmationService],
+  providers: [DialogService, ConfirmationService, LogoutService],
 })
 export class TanksModule {}

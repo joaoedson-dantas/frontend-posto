@@ -4,7 +4,7 @@ import { FormBuilder, Validators } from '@angular/forms';
 import { Component, OnDestroy, OnInit, Input } from '@angular/core';
 import { DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { Subject } from 'rxjs';
-import { TanksEvent } from '../../../../models/enums/globalSetingsEnums/GlobalSettingsEvent';
+import { TanksEvent } from '../../../../models/enums/TanksEnums/TanksEvent';
 
 @Component({
   selector: 'app-tanks-form',

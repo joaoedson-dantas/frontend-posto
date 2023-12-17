@@ -5,6 +5,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { ToolbarModule } from 'primeng/toolbar';
 import { ToolbarNavigationComponent } from './components/toolbar-navigation/toolbar-navigation.component';
+import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
   declarations: [ToolbarNavigationComponent],
@@ -16,6 +17,6 @@ import { ToolbarNavigationComponent } from './components/toolbar-navigation/tool
     ToolbarModule,
   ],
   exports: [ToolbarNavigationComponent],
-  providers: [DialogService, CurrencyPipe],
+  providers: [DialogService, CurrencyPipe, CookieService],
 })
 export class SharedModule {}

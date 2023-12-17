@@ -2,5 +2,5 @@
   <div>
     <app-toolbar-navigation></app-toolbar-navigation>
   </div>
-  <app-tanks-table class="animeLeft" [tanks]="tanksData"></app-tanks-table>
+  <app-tanks-table class="animeLeft" [tanks]="tanksList" (tanksEvent)="handleTankAction($event)"></app-tanks-table>
 </section>
