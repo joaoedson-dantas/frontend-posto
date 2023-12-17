@@ -30,6 +30,12 @@ const routes: Routes = [
       ),
     canActivate: [AuthGuardService],
   },
+  {
+    path: 'tanks',
+    loadChildren: () =>
+      import('./modules/tanks/tanks.module').then((m) => m.TanksModule),
+    canActivate: [AuthGuardService],
+  },
 ];
 
 @NgModule({
