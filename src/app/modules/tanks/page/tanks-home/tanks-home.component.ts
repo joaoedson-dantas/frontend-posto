@@ -53,7 +53,7 @@ export class TanksHomeComponent implements OnInit, OnDestroy {
       });
       this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe({
         next: () => {
-          this.getAllTanks(), this.getAllFillTank();
+          this.getAllFillTank(), this.getAllTanks();
         },
       });
     }
