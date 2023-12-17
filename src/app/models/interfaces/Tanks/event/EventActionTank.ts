@@ -1,4 +1,4 @@
 export interface EventActionTank {
   action: string;
-  id?: number;
+  fuel_tank_id?: number;
 }

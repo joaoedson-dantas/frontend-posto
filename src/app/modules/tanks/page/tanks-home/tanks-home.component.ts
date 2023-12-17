@@ -1,13 +1,14 @@
 import { LogoutService } from './../../../../shared/services/logout/logout.service';
 import { Router } from '@angular/router';
 import { MessageService, ConfirmationService } from 'primeng/api';
-import { DialogService } from 'primeng/dynamicdialog';
+import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
 import { TanksService } from './../../../../services/Tanks/tanks.service';
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
 import { GetTanksResponse } from '../../../../models/interfaces/Tanks/GetTanksResponse';
 import { HttpErrorResponse } from '@angular/common/http';
 import { EventActionTank } from '../../../../models/interfaces/Tanks/event/EventActionTank';
+import { TanksFormComponent } from '../../components/tanks-form/tanks-form.component';
 
 @Component({
   selector: 'app-tanks-home',
@@ -16,6 +17,7 @@ import { EventActionTank } from '../../../../models/interfaces/Tanks/event/Event
 })
 export class TanksHomeComponent implements OnInit, OnDestroy {
   private readonly destroy$: Subject<void> = new Subject();
+  private ref!: DynamicDialogRef;
   public tanksList: Array<GetTanksResponse> = [];
 
   constructor(
@@ -30,11 +32,25 @@ export class TanksHomeComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getAllTanks();
   }
-  // recebendo evento através do output
 
+  // recebendo evento através do output
   handleTankAction(event: EventActionTank): void {
     if (event) {
-      console.log('DADOS DO EVENTO RECEBIDO: ', event);
+      // metodo responsavel por abrir a modal
+
+      this.ref = this.dialogService.open(TanksFormComponent, {
+        header: event?.action,
+        width: '70%',
+        contentStyle: { overflow: 'auto' },
+        baseZIndex: 1000,
+        data: {
+          event: event,
+          tankList: this.tanksList,
+        },
+      });
+      this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe({
+        next: () => this.getAllTanks(),
+      });
     }
   }
 

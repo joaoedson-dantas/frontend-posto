@@ -34,7 +34,7 @@ export class TanksService {
     requestData: FillTankDataRequest
   ): Observable<Array<FillTankDataResponse>> {
     return this.http.post<Array<FillTankDataResponse>>(
-      `${this.API_URL}`,
+      `${this.API_URL}/fill-tanks`,
       requestData,
       this.httpOptions
     );

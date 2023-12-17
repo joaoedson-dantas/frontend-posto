@@ -17,9 +17,7 @@ export class TanksTableComponent {
 
   handleFillTankEvent(action: string, id?: number): void {
     if (action && action !== '') {
-      // armazenar o envento -> recber um objeto, com a action o id, se não tiver o id, armazena no envento apenas a a action
       const tankEventData = id && id !== 0 ? { action, id } : { action };
-
       // EMITIR O VALOR DO EVENTO
       this.tanksEvent.emit(tankEventData);
     }
