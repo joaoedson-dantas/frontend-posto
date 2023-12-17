@@ -1,3 +1,4 @@
+import { FillTankResponse } from './../../../../models/interfaces/Tanks/response/GetAllFillTankResponse';
 import { LogoutService } from './../../../../shared/services/logout/logout.service';
 import { Router } from '@angular/router';
 import { MessageService, ConfirmationService } from 'primeng/api';
@@ -9,6 +10,7 @@ import { GetTanksResponse } from '../../../../models/interfaces/Tanks/GetTanksRe
 import { HttpErrorResponse } from '@angular/common/http';
 import { EventActionTank } from '../../../../models/interfaces/Tanks/event/EventActionTank';
 import { TanksFormComponent } from '../../components/tanks-form/tanks-form.component';
+import { FillTankDataResponse } from '../../../../models/interfaces/Tanks/request/FillTankDataReponse';
 
 @Component({
   selector: 'app-tanks-home',
@@ -19,6 +21,7 @@ export class TanksHomeComponent implements OnInit, OnDestroy {
   private readonly destroy$: Subject<void> = new Subject();
   private ref!: DynamicDialogRef;
   public tanksList: Array<GetTanksResponse> = [];
+  public fillTankList: Array<FillTankResponse> = [];
 
   constructor(
     private tanksService: TanksService,
@@ -31,6 +34,7 @@ export class TanksHomeComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.getAllTanks();
+    this.getAllFillTank();
   }
 
   // recebendo evento através do output
@@ -80,6 +84,39 @@ export class TanksHomeComponent implements OnInit, OnDestroy {
             severity: 'error',
             summary: 'Erro',
             detail: 'Erro ao buscar tanks',
+            life: 2500,
+          });
+        },
+      });
+  }
+
+  getAllFillTank() {
+    this.tanksService
+      .getAllFillTanks()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          console.log(response);
+          if (response.length > 0) {
+            this.fillTankList = response;
+          }
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            this.logoutService.handelLogout();
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Token Expirado',
+              detail: 'Entre novamente',
+              life: 2500,
+            });
+            this.router.navigate(['/login']);
+          }
+          console.log(err);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: 'Erro ao buscar os abastecimentos',
             life: 2500,
           });
         },
