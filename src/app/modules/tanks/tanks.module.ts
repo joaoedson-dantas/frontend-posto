@@ -21,9 +21,10 @@ import { TooltipModule } from 'primeng/tooltip';
 import { ConfirmationService } from 'primeng/api';
 import { TanksTableComponent } from './components/tanks-table/tanks-table.component';
 import { NgChartsModule, NgChartsConfiguration } from 'ng2-charts';
+import { TanksFormComponent } from './components/tanks-form/tanks-form.component';
 
 @NgModule({
-  declarations: [TanksHomeComponent, TanksTableComponent],
+  declarations: [TanksHomeComponent, TanksTableComponent, TanksFormComponent],
   imports: [
     CommonModule,
     FormsModule,

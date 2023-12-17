@@ -1,0 +1,11 @@
+<div>
+  <form [formGroup]="tankForm" (ngSubmit)="handleSubmiteAddFuel()">
+    <div class="card flex flex-column md:flex-column gap-3">
+      <input pInputText placeholder="Quantidade de litros" type="number" formControlName="liters">
+
+      <div class="flex flex-row justify-content-center align-content-center align-items-center">
+        <p-button [disabled]="!tankForm.valid" type="Submit" label="Abastecer"></p-button>
+      </div>
+    </div>
+  </form>
+</div>

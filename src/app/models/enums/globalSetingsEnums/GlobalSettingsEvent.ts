@@ -4,3 +4,7 @@ export enum SettingsEvent {
 }
 
 /* Tipar cada um dos enventos que podem ocorrer e enviar para o componete pai através do output. */
+
+export enum TanksEvent {
+  ADD_FUEL_EVENT = 'Abastecer tanque',
+}
