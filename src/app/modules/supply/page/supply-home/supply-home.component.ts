@@ -35,8 +35,10 @@ export class SupplyHomeComponent implements OnInit, OnDestroy {
   ) {}
 
   ngOnInit(): void {
+    this.getAllSupplies();
     this.getAllFuelBombs();
     this.globalSettingList();
+    console.log(this.suppliesList);
   }
 
   handleSupplyAction(event: EventActionSupply): void {
@@ -127,7 +129,38 @@ export class SupplyHomeComponent implements OnInit, OnDestroy {
       });
   }
 
-  getAllSupplies() {}
+  getAllSupplies() {
+    this.fuelTheCarService
+      .listAllSupplies()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          if (response.length) {
+            this.suppliesList = response;
+            console.log(this.suppliesList);
+          }
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            this.logoutService.handelLogout();
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Token Expirado',
+              detail: 'Logue novamente',
+              life: 2500,
+            });
+            this.router.navigate(['/login']);
+          }
+          console.log(err);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: 'Erro ao buscar abastecimentos',
+            life: 2500,
+          });
+        },
+      });
+  }
 
   ngOnDestroy(): void {
     this.destroy$.next();

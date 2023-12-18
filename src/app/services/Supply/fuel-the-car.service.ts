@@ -46,12 +46,10 @@ export class FuelTheCarService {
   }
 
   // metodos de buscar todos os abastecimentos;
-  ListAllSupplies(): Observable<Array<SupplyResponse>> {
-    return this.http
-      .get<GetAllSupplyResponse>(
-        `${this.API_URL}/supply/all-supplies`,
-        this.httpOptions
-      )
-      .pipe(map((response) => response.content));
+  listAllSupplies(): Observable<Array<SupplyResponse>> {
+    return this.http.get<Array<SupplyResponse>>(
+      `${this.API_URL}/supply/all-supplies?sort=date`,
+      this.httpOptions
+    );
   }
 }

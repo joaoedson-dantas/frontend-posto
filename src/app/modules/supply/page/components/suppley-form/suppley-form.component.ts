@@ -43,7 +43,6 @@ export class SuppleyFormComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.globalSettingList();
-    console.log(this.settingsList);
     this.fuel_pomp_id = this.ref.data?.event?.id;
   }
 
@@ -53,7 +52,6 @@ export class SuppleyFormComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          console.log('eu sou a resposta', response);
           if (response.length > 0) {
             this.settingsList = response;
           }
@@ -88,10 +86,7 @@ export class SuppleyFormComponent implements OnInit, OnDestroy {
 
   handleSubmitAddFuelSupply(): void {
     /* convertendo para litros */
-    console.log('oiiii');
     this.globalSettingList();
-
-    console.log(this.settingsList);
 
     if (this.settingsList.length > 1) {
       const tax_value_setting = this.settingsList.filter(
@@ -103,7 +98,6 @@ export class SuppleyFormComponent implements OnInit, OnDestroy {
       if (this.supplyForm?.value && this.supplyForm.valid) {
         //
         if (this.fuel_pomp_id === 1 || this.fuel_pomp_id === 2) {
-          console.log(this.settingsList);
           this.fuelPrice = Number(this.settingsList[0].value);
           this.fuel_key = this.settingsList[0].key;
         } else {
