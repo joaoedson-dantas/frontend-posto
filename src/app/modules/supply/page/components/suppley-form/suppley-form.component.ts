@@ -114,6 +114,7 @@ export class SuppleyFormComponent implements OnInit, OnDestroy {
           liters: this.liters,
           fuel_pomp_id: Number(this.fuel_pomp_id),
         };
+        console.log(requestData);
         this.fuelTheCarService
           .toFuel(requestData)
           .pipe(takeUntil(this.destroy$))

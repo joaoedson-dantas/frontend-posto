@@ -10,26 +10,31 @@
       </div>
     </p-card>
 
-    <!--  <p-card styleClass="shadow-3 m-5 text-indigo-800" header="Últimos abastecimentos">
-      <p-table #fillTanksTable [value]="fillTankList" [scrollable]="true" scrollHeight="300px" [tableStyle]="{'min-width': '50rem'}">
+    <p-card styleClass="shadow-3 m-5 text-indigo-800" header="Últimos abastecimentos">
+      <p-table #fillTanksTable [value]="suppliesList" [scrollable]="true" scrollHeight="300px" [tableStyle]="{'min-width': '50rem'}">
         <ng-template pTemplate="header">
           <tr>
-            <th>Tanque</th>
+            <th>id</th>
             <th>Litros</th>
+            <th>Valor</th>
+            <th>Imposto</th>
+            <th>Bomba: </th>
             <th pSortableColumn="date" style="width:20%">Data <p-sortIcon field="date"></p-sortIcon></th>
-
           </tr>
         </ng-template>
-
-        <ng-template pTemplate="body" let-fillTankList>
+        <ng-template pTemplate="body" let-suppliesList>
           <tr>
-            <td>{{ fillTankList?.fuel_tank_id }}</td>
-            <td>{{ fillTankList?.liters }}</td>
-            <td>{{ fillTankList?.date | date: 'dd/MM HH:mm'}}</td>
+            <td>{{ suppliesList?.id }}</td>
+
+            <td>{{ suppliesList?.liters }}L</td>
+            <td>{{ suppliesList?.price }}</td>
+            <td>{{ suppliesList?.tax }}%</td>
+            <td>{{ suppliesList?.fuel_pomp_id }}</td>
+            <td>{{ suppliesList?.date | date: 'dd/MM HH:mm'}}</td>
           </tr>
         </ng-template>
       </p-table>
-    </p-card> -->
+    </p-card>
   </div>
 
 </div>

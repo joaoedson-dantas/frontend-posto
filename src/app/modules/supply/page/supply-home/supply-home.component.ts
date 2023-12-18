@@ -42,7 +42,6 @@ export class SupplyHomeComponent implements OnInit, OnDestroy {
   }
 
   handleSupplyAction(event: EventActionSupply): void {
-    console.log('evento acionado');
     if (event) {
       // metodo responsavel por abrir a modal
 
