@@ -18,3 +18,19 @@ O frontend do projeto Controle de Abastecimentos foi desenvolvido em Angular, se
 
 - **Lazy Loading:**
   - Aplicação do conceito de Lazy Loading para otimizar o carregamento de módulos e melhorar o desempenho geral.
+ 
+ ### Tecnologias Utilizadas:
+
+- **Angular:**
+  - Framework robusto para a construção de interfaces web modernas.
+
+- **RxJS:**
+  - Biblioteca para programação reativa, utilizada para realizar requisições HTTP e manipular dados de forma eficiente.
+    
+- **PrimeNG:**
+  - Biblioteca para criação de componetes e estilização
+
+## Antes de começar, certifique-se de ter o seguinte instalado:
+
+- [Node.js](https://nodejs.org/): Plataforma para execução de JavaScript no servidor.
+- [Angular CLI](https://cli.angular.io/): Interface de linha de comando para o Angular.
