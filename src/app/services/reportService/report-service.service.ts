@@ -7,6 +7,7 @@ import { SupplyResponse } from '../../models/interfaces/FuelCar/supply/SupplyRes
 import { GetFuelBombsResponse } from '../../models/interfaces/FuelCar/Pumps/GetAllFuelBombsResponse';
 import { FillTankResponse } from '../../models/interfaces/Tanks/response/GetAllFillTankResponse';
 import { GlobalSettingsDataResponse } from '../../models/interfaces/GlobalSettings/response/GlobalSettingsDataResponse';
+import { GetTanksResponse } from '../../models/interfaces/Tanks/GetTanksResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -40,10 +41,19 @@ export class ReportServiceService {
     );
   }
 
-  // buscar todos os tanques
+  // buscar todos os abastecimentos aos tanques
   getAllFillTanks(): Observable<Array<FillTankResponse>> {
     return this.http.get<Array<FillTankResponse>>(
       `${this.API_URL}/fill-tanks`,
+      this.httpOptions
+    );
+  }
+
+  // buscar todos os tanques
+
+  getAllTanks(): Observable<Array<GetTanksResponse>> {
+    return this.http.get<Array<GetTanksResponse>>(
+      `${this.API_URL}/fuel-tanks`,
       this.httpOptions
     );
   }

@@ -1,0 +1,31 @@
+<!-- <ul> -->
+<!-- {{this.relatorios()}} -->
+<!-- <li *ngFor="let item of this.relatorios()">
+    <span>{{ item.name }}</span>
+    <ul>
+      <li *ngFor="let item2 of item.supplys">
+        <span>{{ item2.date }}</span>
+        <br>
+        <span>{{ item2.price }}</span>
+      </li>
+    </ul>
+    <hr>
+  </li> -->
+<!-- </ul> -->
+
+<div>
+  <p-accordion [activeIndex]="0" *ngFor="let item of this.relatorios().list">
+
+    <p-accordionTab header="{{item.name}} TOTAL: {{ item.totalSupply | currency:'BRL':'symbol':'1.2-2'}}">
+      <p>Total de abastecimento na bomba por dia: </p>
+      <br>
+      <ul *ngFor="let supply of item.supplys">
+        <strong>{{item.tank?.name}}</strong>
+        {{supply.date | date: 'dd/MM HH:mm'}} - {{supply.price | currency:'BRL':'symbol':'1.2-2' }}
+      </ul>
+    </p-accordionTab>
+  </p-accordion>
+  <hr>
+  <br>
+  <h1>Soma total: {{this.relatorios().total | currency:'BRL':'symbol':'1.2-2' }}</h1>
+</div>
