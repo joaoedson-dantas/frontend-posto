@@ -1,3 +1,4 @@
+import { SuppleyFormComponent } from './../components/suppley-form/suppley-form.component';
 import { SupplyResponse } from './../../../../models/interfaces/FuelCar/supply/SupplyResponse';
 import { GlobalSettingsService } from './../../../../services/GlobalSettings/global-settings.service';
 import { Router } from '@angular/router';
@@ -11,7 +12,6 @@ import { GetFuelBombsResponse } from '../../../../models/interfaces/FuelCar/Pump
 import { HttpErrorResponse } from '@angular/common/http';
 import { GlobalSettingsDataResponse } from '../../../../models/interfaces/GlobalSettings/response/GlobalSettingsDataResponse';
 import { EventActionSupply } from '../../../../models/interfaces/FuelCar/event/FuelCar';
-import { SuppleyFormComponent } from '../components/suppley-form/suppley-form.component';
 
 @Component({
   selector: 'app-supply-home',
@@ -27,10 +27,10 @@ export class SupplyHomeComponent implements OnInit, OnDestroy {
 
   constructor(
     private fuelTheCarService: FuelTheCarService,
+    private dialogService: DialogService,
     private messageService: MessageService,
     private globalSettingsService: GlobalSettingsService,
     private router: Router,
-    private dialogService: DialogService,
     private logoutService: LogoutService
   ) {}
 
@@ -39,7 +39,8 @@ export class SupplyHomeComponent implements OnInit, OnDestroy {
     this.globalSettingList();
   }
 
-  handleTankAction(event: EventActionSupply): void {
+  handleSupplyAction(event: EventActionSupply): void {
+    console.log('evento acionado');
     if (event) {
       // metodo responsavel por abrir a modal
 

@@ -66,7 +66,6 @@ export class TanksHomeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          console.log(response.length);
           if (response.length > 0) {
             this.tanksList = response;
           }
@@ -99,7 +98,6 @@ export class TanksHomeComponent implements OnInit, OnDestroy {
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          console.log(response);
           if (response.length > 0) {
             this.fillTankList = response;
           }

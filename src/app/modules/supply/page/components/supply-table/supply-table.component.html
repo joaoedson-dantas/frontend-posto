@@ -5,7 +5,7 @@
 
       <div class="fuel_container">
         <p-card *ngFor="let bomb of bombsList" header="{{bomb?.name?.replace('-', ' ')}}" subheader="{{ bomb?.id }}" styleClass="flex">
-          <p-button label="Abastecer" icon="pi pi-bolt" [style]="{color: 'white', marginTop: '1.5rem'}" pTooltip="Abastecer tanque? {{bomb?.name}}" (onclick)="this.handleSupplyEvent(fuelSupplyEvent, bomb.id)" tooltipPosition="top"></p-button>
+          <p-button label="Abastecer" icon="pi pi-bolt" [style]="{color: 'white', marginTop: '1.5rem'}" pTooltip="Abastecer tanque? {{bomb?.name}}" (onClick)="this.handleSupplyEvent(fuelSupplyEvent, bomb.id)" tooltipPosition="top"></p-button>
         </p-card>
       </div>
     </p-card>
