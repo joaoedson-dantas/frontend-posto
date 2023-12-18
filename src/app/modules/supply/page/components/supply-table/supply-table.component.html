@@ -1,0 +1,35 @@
+<div class="grid">
+  <div class="col-12">
+
+    <p-card styleClass="shadow-3 m-4 text-indigo-800" header="Abastecer: ">
+
+      <div class="fuel_container">
+        <p-card *ngFor="let bomb of bombsList" header="{{bomb?.name?.replace('-', ' ')}}" subheader="{{ bomb?.id }}" styleClass="flex">
+          <p-button label="Abastecer" icon="pi pi-bolt" [style]="{color: 'white', marginTop: '1.5rem'}" pTooltip="Abastecer tanque? {{bomb?.name}}" (onclick)="this.handleSupplyEvent(fuelSupplyEvent, bomb.id)" tooltipPosition="top"></p-button>
+        </p-card>
+      </div>
+    </p-card>
+
+    <!--  <p-card styleClass="shadow-3 m-5 text-indigo-800" header="Últimos abastecimentos">
+      <p-table #fillTanksTable [value]="fillTankList" [scrollable]="true" scrollHeight="300px" [tableStyle]="{'min-width': '50rem'}">
+        <ng-template pTemplate="header">
+          <tr>
+            <th>Tanque</th>
+            <th>Litros</th>
+            <th pSortableColumn="date" style="width:20%">Data <p-sortIcon field="date"></p-sortIcon></th>
+
+          </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-fillTankList>
+          <tr>
+            <td>{{ fillTankList?.fuel_tank_id }}</td>
+            <td>{{ fillTankList?.liters }}</td>
+            <td>{{ fillTankList?.date | date: 'dd/MM HH:mm'}}</td>
+          </tr>
+        </ng-template>
+      </p-table>
+    </p-card> -->
+  </div>
+
+</div>

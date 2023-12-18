@@ -36,6 +36,12 @@ const routes: Routes = [
       import('./modules/tanks/tanks.module').then((m) => m.TanksModule),
     canActivate: [AuthGuardService],
   },
+  {
+    path: 'abastecer',
+    loadChildren: () =>
+      import('./modules/supply/supply.module').then((m) => m.SupplyModule),
+    canActivate: [AuthGuardService],
+  },
 ];
 
 @NgModule({

@@ -1,0 +1,8 @@
+<section class="dashboard-container">
+  <div>
+    <app-toolbar-navigation></app-toolbar-navigation>
+  </div>
+  <app-supply-table class="animeLeft" [suppliesList]="suppliesList" [bombsList]="bombsList" [settingsList]="settingsList" (supplyEvent)="handleTankAction($event)"></app-supply-table>
+</section>
+
+<!-- class="animeLeft" -->

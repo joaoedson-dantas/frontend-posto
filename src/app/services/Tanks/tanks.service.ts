@@ -45,11 +45,9 @@ export class TanksService {
   }
 
   getAllFillTanks(): Observable<Array<FillTankResponse>> {
-    return this.http
-      .get<GetAllFillTankResponse>(
-        `${this.API_URL}/fill-tanks`,
-        this.httpOptions
-      )
-      .pipe(map((response) => response.content));
+    return this.http.get<Array<FillTankResponse>>(
+      `${this.API_URL}/fill-tanks`,
+      this.httpOptions
+    );
   }
 }

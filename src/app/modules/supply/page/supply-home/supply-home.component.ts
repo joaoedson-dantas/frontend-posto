@@ -1,74 +1,107 @@
-import { FillTankResponse } from './../../../../models/interfaces/Tanks/response/GetAllFillTankResponse';
-import { LogoutService } from './../../../../shared/services/logout/logout.service';
+import { SupplyResponse } from './../../../../models/interfaces/FuelCar/supply/SupplyResponse';
+import { GlobalSettingsService } from './../../../../services/GlobalSettings/global-settings.service';
 import { Router } from '@angular/router';
-import { MessageService, ConfirmationService } from 'primeng/api';
+import { LogoutService } from './../../../../shared/services/logout/logout.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { TanksService } from './../../../../services/Tanks/tanks.service';
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { MessageService } from 'primeng/api';
+import { FuelTheCarService } from './../../../../services/Supply/fuel-the-car.service';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subject, takeUntil } from 'rxjs';
-import { GetTanksResponse } from '../../../../models/interfaces/Tanks/GetTanksResponse';
+import { GetFuelBombsResponse } from '../../../../models/interfaces/FuelCar/Pumps/GetAllFuelBombsResponse';
 import { HttpErrorResponse } from '@angular/common/http';
-import { EventActionTank } from '../../../../models/interfaces/Tanks/event/EventActionTank';
-import { TanksFormComponent } from '../../components/tanks-form/tanks-form.component';
+import { GlobalSettingsDataResponse } from '../../../../models/interfaces/GlobalSettings/response/GlobalSettingsDataResponse';
+import { EventActionSupply } from '../../../../models/interfaces/FuelCar/event/FuelCar';
+import { SuppleyFormComponent } from '../components/suppley-form/suppley-form.component';
 
 @Component({
-  selector: 'app-tanks-home',
-  templateUrl: './tanks-home.component.html',
-  styleUrl: './tanks-home.component.scss',
+  selector: 'app-supply-home',
+  templateUrl: './supply-home.component.html',
+  styleUrl: './supply-home.component.scss',
 })
-export class TanksHomeComponent implements OnInit, OnDestroy {
+export class SupplyHomeComponent implements OnInit, OnDestroy {
   private readonly destroy$: Subject<void> = new Subject();
   private ref!: DynamicDialogRef;
-  public tanksList: Array<GetTanksResponse> = [];
-  public fillTankList: Array<FillTankResponse> = [];
+  public bombsList: Array<GetFuelBombsResponse> = [];
+  public settingsList: Array<GlobalSettingsDataResponse> = [];
+  public suppliesList: Array<SupplyResponse> = []; //@InP]
 
   constructor(
-    private tanksService: TanksService,
-    private dialogService: DialogService,
+    private fuelTheCarService: FuelTheCarService,
     private messageService: MessageService,
-    private ConfirmationService: ConfirmationService,
-    private logoutService: LogoutService,
-    private router: Router /* Serve para redirecionar o usuário para outras telas. */
+    private globalSettingsService: GlobalSettingsService,
+    private router: Router,
+    private dialogService: DialogService,
+    private logoutService: LogoutService
   ) {}
 
   ngOnInit(): void {
-    this.getAllTanks();
-    this.getAllFillTank();
+    this.getAllFuelBombs();
+    this.globalSettingList();
   }
 
-  // recebendo evento através do output
-  handleTankAction(event: EventActionTank): void {
+  handleTankAction(event: EventActionSupply): void {
     if (event) {
       // metodo responsavel por abrir a modal
 
-      this.ref = this.dialogService.open(TanksFormComponent, {
+      this.ref = this.dialogService.open(SuppleyFormComponent, {
         header: event?.action,
         width: '70%',
         contentStyle: { overflow: 'auto' },
         baseZIndex: 1000,
         data: {
           event: event,
-          tankList: this.tanksList,
+          suppliesList: this.suppliesList,
         },
       });
       this.ref.onClose.pipe(takeUntil(this.destroy$)).subscribe({
         next: () => {
-          this.getAllFillTank(), this.getAllTanks();
+          this.getAllSupplies();
         },
       });
     }
   }
 
-  // busca dados na api.
-  getAllTanks() {
-    this.tanksService
-      .getAllFuelTanks()
+  getAllFuelBombs() {
+    this.fuelTheCarService
+      .getAllFuelBombs()
       .pipe(takeUntil(this.destroy$))
       .subscribe({
         next: (response) => {
-          console.log(response.length);
           if (response.length > 0) {
-            this.tanksList = response;
+            this.bombsList = response;
+            this.globalSettingList();
+          }
+        },
+        error: (err: HttpErrorResponse) => {
+          if (err.status === 401) {
+            this.logoutService.handelLogout();
+            this.messageService.add({
+              severity: 'error',
+              summary: 'Token Expirado',
+              detail: 'Logue novamente',
+              life: 2500,
+            });
+            this.router.navigate(['/login']);
+          }
+          console.log(err);
+          this.messageService.add({
+            severity: 'error',
+            summary: 'Erro',
+            detail: 'Erro ao buscar bombas',
+            life: 2500,
+          });
+        },
+      });
+  }
+
+  globalSettingList() {
+    this.globalSettingsService
+      .getAllGlobalSettings()
+      .pipe(takeUntil(this.destroy$))
+      .subscribe({
+        next: (response) => {
+          if (response.length > 0) {
+            this.settingsList = response;
           }
         },
         error: (err: HttpErrorResponse) => {
@@ -93,38 +126,7 @@ export class TanksHomeComponent implements OnInit, OnDestroy {
       });
   }
 
-  getAllFillTank() {
-    this.tanksService
-      .getAllFillTanks()
-      .pipe(takeUntil(this.destroy$))
-      .subscribe({
-        next: (response) => {
-          console.log(response);
-          if (response.length > 0) {
-            this.fillTankList = response;
-          }
-        },
-        error: (err: HttpErrorResponse) => {
-          if (err.status === 401) {
-            this.logoutService.handelLogout();
-            this.messageService.add({
-              severity: 'error',
-              summary: 'Token Expirado',
-              detail: 'Entre novamente',
-              life: 2500,
-            });
-            this.router.navigate(['/login']);
-          }
-          console.log(err);
-          this.messageService.add({
-            severity: 'error',
-            summary: 'Erro',
-            detail: 'Erro ao buscar os abastecimentos',
-            life: 2500,
-          });
-        },
-      });
-  }
+  getAllSupplies() {}
 
   ngOnDestroy(): void {
     this.destroy$.next();

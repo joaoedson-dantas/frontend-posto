@@ -1,17 +1,17 @@
 import { CookieService } from 'ngx-cookie-service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { environment } from '../environments/environment';
+import { environment } from '../../environments/environment';
 import { Observable, map } from 'rxjs';
 import {
   GetAllFuelBombsResponse,
   GetFuelBombsResponse,
-} from '../models/interfaces/FuelCar/Pumps/GetAllFuelBombsResponse';
-import { SupplyRequest } from '../models/interfaces/FuelCar/supply/request/SupplyRequest';
+} from '../../models/interfaces/FuelCar/Pumps/GetAllFuelBombsResponse';
+import { SupplyRequest } from '../../models/interfaces/FuelCar/supply/request/SupplyRequest';
 import {
   GetAllSupplyResponse,
   SupplyResponse,
-} from '../models/interfaces/FuelCar/supply/SupplyResponse';
+} from '../../models/interfaces/FuelCar/supply/SupplyResponse';
 
 @Injectable({
   providedIn: 'root',
@@ -30,12 +30,10 @@ export class FuelTheCarService {
 
   // buscar bombas de combustíveis
   getAllFuelBombs(): Observable<Array<GetFuelBombsResponse>> {
-    return this.http
-      .get<GetAllFuelBombsResponse>(
-        `${this.API_URL}/fuel-pumps`,
-        this.httpOptions
-      )
-      .pipe(map((response) => response.content));
+    return this.http.get<Array<GetFuelBombsResponse>>(
+      `${this.API_URL}/fuel-pumps`,
+      this.httpOptions
+    );
   }
 
   // metodos de abastecimento

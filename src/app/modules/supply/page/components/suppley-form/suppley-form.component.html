@@ -1,0 +1,15 @@
+<div>
+  <form [formGroup]="supplyForm" (ngSubmit)="handleSubmitAddFuelSupply()">
+    <div class="card flex flex-column md:flex-column gap-3">
+
+      <input pInputText placeholder="Digite o valor que deseja abastecer" type="number" formControlName="liters" />
+
+      <div class="flex flex-row justify-content-center align-content-center align-items-center m-1">
+
+        <p-button [disabled]="!supplyForm.valid" type="Submit" label="Abastecer"></p-button>
+
+      </div>
+
+    </div>
+  </form>
+</div>
